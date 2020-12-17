@@ -24,5 +24,20 @@ namespace CrudWithRazorPages.Pages.Book
         {
             Books = await _db.Book.ToListAsync();
         }
+
+
+        //custom OnPost method with given name Deletem.(Matches to -> asp-page-handler="Delete" on the front end)
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var book = await _db.Book.FindAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            _db.Book.Remove(book);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("Index");
+        }
     }
 }
