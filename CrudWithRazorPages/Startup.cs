@@ -28,6 +28,8 @@ namespace CrudWithRazorPages
             services.AddDbContext<ApplicationDbContext>(option =>
                                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddControllersWithViews();
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
@@ -54,6 +56,7 @@ namespace CrudWithRazorPages
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
